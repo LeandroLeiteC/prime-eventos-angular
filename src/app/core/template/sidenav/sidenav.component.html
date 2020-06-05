@@ -1,0 +1,68 @@
+<mat-sidenav-container>
+
+    <mat-sidenav class="sidenav" mode="side" [(opened)]="isVisible" fixedInViewport="true" fixedTopGap=64>
+        
+        <mat-nav-list class="nav-list">
+            
+            <a mat-list-item routerLink="/">
+                <i class="material-icons">home</i>
+                Início
+            </a>
+            
+            <a mat-list-item routerLink="/eventos">
+                <i class="material-icons">storefront</i>
+                Eventos
+            </a>
+
+            <a *ngIf="(innerWidth < 700) && (user$ | async) as user" mat-list-item routerLink="/carrinho">
+                <i class="material-icons">shopping_cart</i>
+                Carrinho
+            </a>
+            <a *ngIf="(user$ | async) as user"  mat-list-item routerLink="/minhas-compras">
+                <i class="material-icons">local_mall</i>
+                Minhas Compras
+            </a>
+            
+            <div *ngIf="(user$ | async) as user">
+                <div *ngIf="user.isAdmin">
+                    <a  mat-list-item routerLink="/admin">
+                        <i class="material-icons">build</i>
+                        Administração
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer">
+                <a *ngIf="(innerWidth < 700) && !(user$ | async) as user;" mat-list-item routerLink="/login">
+                    <i class="material-icons">person</i>
+                    Login
+                </a>
+                <a *ngIf="(innerWidth < 700) && !(user$ | async) as user" mat-list-item routerLink="/cadastro">
+                    <i class="material-icons">person_add</i>
+                    Cadastre-se
+                </a>
+               
+                <a *ngIf="(innerWidth < 700) && (user$ | async) as user" mat-list-item (click)="logout()">
+                    <i class="material-icons">navigate_before</i>
+                    Sair
+                </a>
+                <a *ngIf="(innerWidth < 700) && (user$ | async) as user" mat-list-item>
+                    {{ user.nome }}
+                </a>
+                
+                <div class="dev">
+                    <span>
+                        Desenvolvido por <strong>Lea<span class="red">ndro</span></strong>
+                    </span>
+                </div>
+            </div>
+
+        </mat-nav-list>
+
+    </mat-sidenav>
+
+    <mat-sidenav-content class="content" >
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+    
+</mat-sidenav-container>

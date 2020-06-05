@@ -1,0 +1,21 @@
+<mat-tab-group mat-align-tabs="center" color="warn" 
+[selectedIndex]="selected.value"
+(selectedIndexChange)="selected.setValue($event)">
+    <mat-tab label="Eventos">
+            <a routerLink="evento/cadastrar" mat-button color="primary">
+                <i class="material-icons">add_circle</i>
+                Cadastrar evento
+            </a>
+        <prime-tabela-eventos></prime-tabela-eventos>
+    </mat-tab>
+    <mat-tab label="Casas de Show">
+        <a routerLink="casa-de-show/cadastrar" mat-button color="primary">
+            <i class="material-icons">add_circle</i>
+            Cadastrar Casa de Show
+        </a>
+        <prime-tabela-casas-de-show></prime-tabela-casas-de-show>
+    </mat-tab>
+    <mat-tab label="Usuarios">
+        <prime-signup [isAdmin]="true"></prime-signup>
+    </mat-tab>
+</mat-tab-group> 

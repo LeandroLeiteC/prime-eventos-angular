@@ -1,0 +1,37 @@
+.empty-cart {
+    margin-top: 50px;
+    text-align: center;
+    color: #aaa;
+}
+
+.empty-cart mat-icon {
+    transform: scale(4);
+    margin-bottom: 40px;
+}
+
+mat-card-content { 
+    margin-right: 20px;
+    margin-bottom: 0;
+}
+
+mat-card {
+    margin-bottom: 20px;
+}
+
+.button-cart {
+    margin: 15px 25px;
+}
+
+.button-cart-bottom {
+    margin-top: 15px;
+}
+
+h1 {
+    letter-spacing: 0.1em;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.button-seemore {
+    margin-right: 10px;
+}

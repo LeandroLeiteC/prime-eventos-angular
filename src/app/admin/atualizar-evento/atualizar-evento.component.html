@@ -1,0 +1,183 @@
+<h1>Atualizar evento</h1>
+<div class="content">
+    <form [formGroup]="eventoForm" (submit)="cadastrar()">
+
+        <div class="row">
+            <div class="col-lg-5 self-align-start">
+                <mat-form-field class="nome" appearance="standard">
+                    <mat-label>Nome do evento</mat-label>
+                    <input #nome matInput formControlName="nome" autofocus>
+                    <button mat-button matSuffix mat-icon-button *ngIf="eventoForm.get('nome').value">
+                        <mat-icon (click)="limpar('nome')">close</mat-icon>
+                    </button>
+                    <mat-hint align="end">{{nome.value?.length || 0}}/40</mat-hint>
+                    <mat-error *ngIf="eventoForm.get('nome').errors?.required">
+                        Nome é <strong>obrigatório</strong>
+                    </mat-error>
+                    <mat-error *ngIf="eventoForm.get('nome').errors?.minlength">
+                        Mínimo de 2 caracteres
+                    </mat-error>
+                    <mat-error *ngIf="eventoForm.get('nome').errors?.maxlength">
+                        Máximo de 40 caractéres
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-4 align-self-center">
+                <mat-form-field class="casaDeShow" style="padding: 10.5px 0 0 0">
+                    <mat-label>Casa de Show</mat-label>
+                    <mat-select msInfiniteScroll (infiniteScroll)="onScroll()" formControlName="idCasaDeShow">
+                        <mat-option disabled>Selecione uma casa de show</mat-option>
+                        <mat-option class="options" *ngFor="let casaDeShow of casasDeShow" [value]="casaDeShow.id">{{ casaDeShow.nome }}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="eventoForm.get('idCasaDeShow').errors?.required">
+                        Casa de show é <strong>obrigatório</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-3 align-self-center">
+                <mat-form-field class="status" style="padding: 10.5px 0 0 0">
+                    <mat-label>Status</mat-label>
+                    <mat-select formControlName="status">
+                        <mat-option value="ABERTO">Aberto</mat-option>
+                        <mat-option value="OCULTO">Oculto</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="eventoForm.get('status').errors?.required">
+                        Status é <strong>obrigatório</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-2">
+                <mat-form-field class="data">
+                    <mat-label>Data do evento</mat-label>
+                    <input matInput formControlName="data" placeholder="05/10/2020" >
+                    <button mat-button matSuffix mat-icon-button *ngIf="eventoForm.get('data').value">
+                        <mat-icon (click)="limpar('data')">close</mat-icon>
+                    </button>
+                    <mat-hint align="start">Formato: dd/mm/yyyy</mat-hint>
+                    <mat-error *ngIf="eventoForm.get('data').errors?.required">
+                        Data é <strong>obrigatório</strong>
+                    </mat-error>
+                    <mat-error *ngIf="eventoForm.get('data').errors?.pattern">
+                        Formato inválido dd/mm/yyyy
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-2">
+                <mat-form-field class="hora">
+                    <mat-label>Hora do evento</mat-label>
+                    <input matInput formControlName="hora" placeholder="15:30">
+                    <button mat-button matSuffix mat-icon-button *ngIf="eventoForm.get('hora').value">
+                        <mat-icon (click)="limpar('hora')">close</mat-icon>
+                    </button>
+                    <mat-hint align="start">Formato: ##:##</mat-hint>
+                    <mat-error *ngIf="eventoForm.get('hora').errors?.required">
+                        Hora é <strong>obrigatório</strong>
+                    </mat-error>
+                    <mat-error *ngIf="eventoForm.get('hora').errors?.pattern">
+                        Formato inválido ##:##
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-2">
+                <mat-form-field class="preco">
+                    <mat-label>Preço do ingresso</mat-label>
+                    <input matInput formControlName="preco">
+                    <button mat-button matSuffix mat-icon-button *ngIf="eventoForm.get('preco').value">
+                        <mat-icon (click)="limpar('preco')">close</mat-icon>
+                    </button>
+                    <mat-hint align="start">Formato: ###,##</mat-hint>
+                    <mat-error *ngIf="eventoForm.get('preco').errors?.required">
+                        Preço é <strong>obrigatório</strong>
+                    </mat-error>
+                    <mat-error *ngIf="eventoForm.get('preco').errors?.pattern">
+                        Formato inválido ###,##
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-2">
+                <mat-form-field class="ingressosDisponiveis">
+                    <mat-label>Ingressos disponíveis</mat-label>
+                    <input type="number" matInput formControlName="ingressosDisponiveis">
+                    <button mat-button matSuffix mat-icon-button *ngIf="eventoForm.get('ingressosDisponiveis').value">
+                        <mat-icon (click)="limpar('ingressosDisponiveis')">close</mat-icon>
+                    </button>
+                    <mat-hint align="start">Total de ingressos disponíveis para compra</mat-hint>
+                    <mat-error *ngIf="eventoForm.get('ingressosDisponiveis').errors?.required">
+                        Ingressos disponíveis é <strong>obrigatório</strong>
+                    </mat-error>
+                    <mat-error *ngIf="eventoForm.get('ingressosDisponiveis').errors?.min">
+                        Mínimo de 10 ingressos
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-2">
+                <mat-form-field class="limiteCliente">
+                    <mat-label>Limite por Cliente</mat-label>
+                    <input type="number" matInput formControlName="limiteCliente">
+                    <button mat-button matSuffix mat-icon-button *ngIf="eventoForm.get('limiteCliente').value">
+                        <mat-icon (click)="limpar('limiteCliente')">close</mat-icon>
+                    </button>
+                    <mat-hint align="start">Limite de ingressos por cliente</mat-hint>
+                    <mat-error *ngIf="eventoForm.get('limiteCliente').errors?.required">
+                        Limite de ingressos é <strong>obrigatório</strong>
+                    </mat-error>
+                    <mat-error *ngIf="eventoForm.get('limiteCliente').errors?.min">
+                        Mínimo de 1 ingresso
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <mat-form-field class="descricao" appearance="standard">
+                    <mat-label>Pequena descrição</mat-label>
+                    <input #pequenaDescricao matInput formControlName="pequenaDescricao">
+                    <button mat-button matSuffix mat-icon-button *ngIf="eventoForm.get('pequenaDescricao').value">
+                        <mat-icon (click)="limpar('pequenaDescricao')">close</mat-icon>
+                    </button>
+                    <mat-hint align="end">{{pequenaDescricao.value?.length || 0}}/120</mat-hint>
+                    <mat-hint align="start">Essa descrição irá no card</mat-hint>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <mat-form-field class="descricao" appearance="standard">
+                    <mat-label>Descricao</mat-label>
+                    <textarea matInput formControlName="descricao"></textarea>
+                    <button mat-button matSuffix mat-icon-button *ngIf="eventoForm.get('descricao').value">
+                        <mat-icon (click)="limpar('descricao')">close</mat-icon>
+                    </button>
+                    <mat-hint align="start">Essa descrição irá na página do seu evento</mat-hint>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-lg-6">
+                <div class="upload-btn-wrapper card">
+                    <button class="btn">{{ nomeCard }}</button>
+                    <input type="file" (change)="uploadCard($event)"/>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="upload-btn-wrapper">
+                    <button class="btn">{{ nomeBanner }}</button>
+                    <input type="file" (change)="uploadBanner($event)"/>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row ml-1 mt-1">
+            <button type="button" (click)="cancelar()" class="mr-2" mat-raised-button color="warn">Cancelar</button>
+            <button [disabled]="eventoForm.invalid" type="submit" mat-raised-button color="primary">Enviar</button>
+        </div>
+
+
+    </form> 
+</div>

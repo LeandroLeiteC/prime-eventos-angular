@@ -1,0 +1,49 @@
+.header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 99;
+}
+
+.header a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.header a.title {
+    color: #000;
+}
+
+.header .logo {
+    max-height: 50px;
+    padding-left: 15px;
+}
+
+.header .title-group {
+    padding-left: 20px;
+}
+
+.header .title-group mat-icon{
+    margin-right: 10px;
+}
+
+.header .right-side {
+    flex: 1 1 auto;
+}
+
+.header .button-signup {
+    margin-left: 15px;
+}
+
+.header .nome {
+    font-size: 0.9em;
+    padding-top: 5px;
+}
+
+.header .carrinho {
+    margin-right: 20px;
+    font-size: 0.9em;
+    padding-top: 5px;
+}

@@ -1,0 +1,26 @@
+<mat-accordion>
+    
+    <mat-expansion-panel (opened)="pegarCompraEventos( compra.id )">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Compra#{{ compra.id }}
+        </mat-panel-title>
+        <mat-panel-description>
+            Data e hora: {{ compra.hora | date: 'dd/MM/yyyy HH:mm'}} | 
+            Total: {{ compra.total | currency: 'BRL'}} |
+            {{ compra.statusCompra }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <ng-template matExpansionPanelContent>
+          <div *ngFor="let compraEvento of compraEventos">
+              <prime-card [compraEvento]="compraEvento"></prime-card>
+          </div>
+          <mat-card *ngIf="compra.statusCompra != 'CANCELADO'">
+              <div class="row justify-content-end">
+                  <button mat-stroked-button color="warn" class="button-cancel" (click)="cancelar(compra.id)">Cancelar Compra</button>
+              </div>
+          </mat-card>
+      </ng-template>
+    </mat-expansion-panel>
+
+  </mat-accordion>

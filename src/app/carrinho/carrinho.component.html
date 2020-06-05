@@ -1,0 +1,45 @@
+<div class="spinner-container" *ngIf="loading$ | async">
+    <mat-spinner style="margin: 150px auto"></mat-spinner>
+</div>
+
+<div *ngIf="eventos != null; else empty" class="container">
+    <div class="row justify-content-center">
+        <div class="col-11">
+            <div class="row justify-content-between">
+                <h1 class="col-4">Carrinho</h1>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-around" *ngFor="let evento of eventos | keyvalue">
+        <prime-card class="col-11" [evento]="evento.key" [quantidade]="evento.value"></prime-card>
+    </div>
+    
+    <div class="row justify-content-center">
+        <div class="col-11">
+            <mat-card class="mat-elevation-z2" >
+                <div class="row justify-content-end">
+                    <mat-card-content><h2><strong>Total: {{ total | currency: 'BRL'}} </strong></h2></mat-card-content>
+                </div>
+            </mat-card>
+            <mat-card class="mat-elevation-z2" style="background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 80%, rgba(48,63,159,1) 100%);" >
+                <div class="row justify-content-end">
+                <mat-card-content>
+                        <a mat-stroked-button color="primary" routerLink="/eventos" class="button-seemore">Ver mais eventos</a>
+                        <button  mat-raised-button color="primary" (click)="comprar()">Finalizar compra</button>
+                    </mat-card-content>
+                </div>
+            </mat-card>
+            
+        </div>
+    </div>
+</div>
+
+<ng-template #empty >
+    <div class="empty-cart">
+        <mat-icon>remove_shopping_cart</mat-icon>
+        <h1 class="title">Carrinho vazio</h1>
+        <h3 class="subtitle">Seu carrinho está vazio</h3>
+        <p title="description">Confira nossos eventos e ache um perto de você!</p>
+        <a class="link" routerLink="/eventos" mat-stroked-button>Confira aqui!</a>
+    </div>
+</ng-template>

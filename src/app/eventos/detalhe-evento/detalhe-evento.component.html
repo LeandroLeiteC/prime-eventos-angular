@@ -1,0 +1,42 @@
+<div class="row">
+    <img class="col-12" [src]="urlBanner">
+</div>
+<div class="row content">
+    <div class="col-lg-8">
+        <a class="align-self-start" routerLink="/eventos" mat-button color="primary">Voltar</a>
+        <h1 class="title">{{ evento?.nome }}</h1>
+        <p class="justify">{{ evento?.descricao}}</p>
+    </div>
+    <div class="col-lg-4 col-md-8 ml-auto mr-auto mt-5">
+        <mat-card class="mat-elevation-z6 ">
+            <img mat-card-image [src]="urlCard">
+            <mat-card-title class="card-center">{{ evento?.nome }}</mat-card-title>
+            <mat-card-content class="justify">{{ evento?.pequenaDescricao }}</mat-card-content>
+            <mat-card-actions>
+                <div class="row">
+                    <span class="col align-self-start" matTooltip="Data do evento" matTooltipShowDelay=1000>
+                        <i class="material-icons">event</i>
+                        {{ evento?.data | date:'dd/MM/yyyy HH:mm'}}
+                    </span>
+                    <span class=" col align-self-end" matTooltip="Valor do ingresso" matTooltipShowDelay=1000>
+                        <i class="material-icons">attach_money</i>
+                        {{ evento?.preco | currency: 'BRL' }}
+                    </span>
+                </div>
+                <div class="row justify-content-around mt-1">
+                    <button mat-stroked-button color="primary" (click)="adicionar(evento.id, evento.limiteCliente, evento.ingressosDisponiveis)">Adicionar ao carrinho</button>
+                </div>
+                
+            </mat-card-actions>
+        </mat-card>
+        <mat-card class="mat-elevation-z6 mt-3">
+            <mat-card-title>{{ evento?.casaDeShow?.nome }}</mat-card-title>
+            <mat-card-content>
+                <span>{{evento?.casaDeShow?.rua}}, {{evento?.casaDeShow?.numero}}</span><br>
+                <span>{{evento?.casaDeShow?.cidade}} - {{evento?.casaDeShow?.uf}}, CEP: {{evento?.casaDeShow?.cep}} </span><br>
+                <span>Tel: {{ evento?.casaDeShow?.telefone}}</span>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    
+</div>

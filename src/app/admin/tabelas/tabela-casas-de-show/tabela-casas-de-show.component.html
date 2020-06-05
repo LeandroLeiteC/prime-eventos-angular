@@ -1,0 +1,69 @@
+<div class="table">
+
+    <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+      <mat-spinner></mat-spinner>
+    </div>
+  
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z4">
+        <!-- Id Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef >Id</th>
+          <td mat-cell *matCellDef="let row">{{row.id}}</td>
+        </ng-container>
+    
+        <!-- Nome Column -->
+        <ng-container matColumnDef="nome">
+          <th mat-header-cell *matHeaderCellDef >Nome</th>
+          <td mat-cell *matCellDef="let row">{{row.nome}}</td>
+        </ng-container>
+    
+        <!-- limitePessoas Column -->
+        <ng-container matColumnDef="limitePessoas">
+          <th mat-header-cell *matHeaderCellDef >Limite de Pessoas</th>
+          <td mat-cell *matCellDef="let row">{{row.limitePessoas }}</td>
+        </ng-container>
+  
+        <!-- localizacao Column -->
+        <ng-container matColumnDef="localizacao">
+          <th mat-header-cell *matHeaderCellDef >Localização</th>
+          <td mat-cell *matCellDef="let row">{{row.cidade}}-{{row.uf}}</td>
+        </ng-container>
+  
+        <!-- telefone Column -->
+        <ng-container matColumnDef="telefone">
+          <th mat-header-cell *matHeaderCellDef >Telefone</th>
+          <td mat-cell *matCellDef="let row">{{row.telefone}}</td>
+        </ng-container>
+  
+        <!-- status Column -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef >Status</th>
+          <td mat-cell *matCellDef="let row">{{row.status }}
+            <button type="button" mat-icon-button (click)="ocultar(row.id, row.status)">
+              <mat-icon>{{ row.status == 'OCULTO' ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </td>
+        </ng-container>
+    
+        <!-- Action Column -->
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef >Editar</th>
+          <td mat-cell *matCellDef="let row">
+            <a mat-icon-button routerLink='/admin/casa-de-show/atualizar/{{row.id}}' class="button-edit">
+              <i class="material-icons blue">edit</i>
+            </a>
+            <button mat-icon-button (click)='deletar(row.id, row.status)'>
+              <i class="material-icons red">delete</i>
+            </button>
+          </td>
+        </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <div>
+        <mat-paginator [length]="dataSource.totalElements"
+              pageSize="6" showFirstLastButtons>
+        </mat-paginator>
+    </div>
+</div>

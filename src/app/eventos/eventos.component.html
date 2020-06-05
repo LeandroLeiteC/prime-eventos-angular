@@ -1,0 +1,29 @@
+<div class="spinner-container" *ngIf="loading$ | async">
+    <mat-spinner style="margin: 150px auto"></mat-spinner>
+</div>
+
+<div *ngIf=" (eventos != null) ; else semEvento">
+    <div class="search-results"
+    infiniteScroll
+    [infiniteScrollDistance]="1"
+    [infiniteScrollThrottle]="50"
+    (scrolled)="onScroll()">
+
+        <div class="row justify-content-around">
+            <div *ngFor="let evento of eventos">
+                <div class="col-md-4">
+                    <prime-card [evento]="evento"></prime-card>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<ng-template #semEvento>
+    <div class="noEventos">
+        <mat-icon>mood_bad</mat-icon>
+        <h1>Não há eventos disponíveis</h1>
+        <h4>Infelizmente, no momento, estamos sem eventos! <br> Fique de olho em nosso site que logo teremos um evento perto de você!</h4>
+    </div>
+</ng-template>

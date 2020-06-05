@@ -1,0 +1,19 @@
+<div class="container">
+    
+    <div class="row justify-content-center">
+        <div *ngIf="compras != null; else semCompras" class="col-11">
+            <div  *ngFor="let compra of compras; let i = index">
+                <prime-panel [compra]="compra" [panelId]="i"></prime-panel>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #semCompras>
+    <div class="sem-compras">
+        <h1>Você ainda não fez nenhuma compra</h1>
+        <h3>Está esperando o que para participar dos melhores eventos?</h3>
+        <p>Confira nossos eventos e ache um perto de você!</p>
+        <a routerLink="/eventos" mat-stroked-button>Confira aqui!</a>
+    </div>
+</ng-template>

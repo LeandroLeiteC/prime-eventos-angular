@@ -1,0 +1,32 @@
+<mat-dialog-content class="mat-typography">
+    <h2 mat-dialog-title>Cancelar Compra</h2>
+</mat-dialog-content>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Evento</th>
+      <th scope="col">Preço</th>
+      <th scope="col">Quantidade</th>
+      <th scope="col">Subtotal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let ce of data.compraEventos">
+      <td>{{ ce.evento.nome }}</td>
+      <td>{{ ce.evento.preco | currency: 'BRL'}}</td>
+      <td class="text-center">{{ ce.qtdIngresso }}</td>
+      <td>{{ ce.subtotal | currency: 'BRL'}}</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td class="text-right"><strong>Total:</strong></td>
+      <td>{{ data.compra.total | currency: 'BRL' }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<mat-dialog-actions align="end">
+  <button mat-stroked-button color="warn" mat-dialog-close="false">Voltar</button>
+  <button mat-raised-button color="warn" cdkFocusInitial (click)="cancelar(data.compra.id)">Cancelar</button>
+</mat-dialog-actions>

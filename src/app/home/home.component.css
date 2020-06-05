@@ -1,0 +1,17 @@
+.content {
+    background: url("/assets/img/fundo.jpg");
+    background-size: cover;
+    height: 85vh;
+}
+
+.content h1 {
+    margin-top: 100px;
+    text-align: center;
+    font: 400 4em/50px fantasy !important;
+}
+
+.content p {
+    padding: 40px 0;
+    font-weight: 600;
+    font-size: 1.1rem;
+}

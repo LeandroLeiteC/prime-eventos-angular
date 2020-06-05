@@ -1,0 +1,31 @@
+<mat-card>
+    <div class="row">
+
+        <div class="col-2 align-self-center">
+            <img  [src]="url">
+        </div>
+        
+        <div class="col-4">
+            <h2>{{ compraEvento.evento.nome }}</h2>
+            <p class="descricao">{{ compraEvento.evento.pequenaDescricao }}</p>
+        </div>
+       
+        <div class="col-1 align-self-center ingressos">
+            <div class="row justify-content-around">
+                Ingressos:
+            </div>
+            <div class="row justify-content-around">
+                <p class="quantidade">{{ compraEvento.qtdIngresso }}</p>
+            </div>
+        </div>
+        
+        <div class="col-2 align-self-center">
+            <div class="row justify-content-around">
+                <strong>Subtotal:</strong>
+            </div>
+            <div class="row justify-content-around">
+                <p class="preco">{{ compraEvento.subtotal | currency: 'BRL' }}</p>
+            </div>
+        </div>
+    </div>
+</mat-card>

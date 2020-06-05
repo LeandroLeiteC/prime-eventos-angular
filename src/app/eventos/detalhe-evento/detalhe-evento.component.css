@@ -1,0 +1,18 @@
+.justify {
+    text-align: justify;
+}
+
+.title {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 2rem;
+}
+
+.content{
+    background-color: rgba(60, 151, 255, 0.041);
+    margin: 0;
+}
+
+.card-center {
+    text-align: center;
+}

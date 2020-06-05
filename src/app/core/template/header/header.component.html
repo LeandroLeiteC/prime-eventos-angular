@@ -1,0 +1,40 @@
+<mat-toolbar class="header mat-elevation-z1" layout="row">
+    <span>
+        <button mat-icon-button (click)="hideSideNav()">
+            <mat-icon class="toggle-button">dehaze</mat-icon>
+        </button>
+    </span>
+
+    <span>
+        <a routerLink="/">
+            <img class="logo" src="assets/img/logo.png">
+        </a>
+    </span>
+
+    <span class="title-group">
+        <a class="title" routerLink="{{ routerUrl }}">
+            <mat-icon>{{ icon }}</mat-icon>
+            {{ title }} 
+        </a>
+    </span>
+    <span class="right-side"></span>
+    <span class="nome" *ngIf="(user$ | async) && innerWidth > 699">
+        <a routerLink="/carrinho" mat-icon-button>
+            <mat-icon [matBadge]="items" matBadgeColor="warn">shopping_cart</mat-icon>
+        </a>
+    </span>
+    <div *ngIf="(user$ | async) as user; else login">
+        <div *ngIf="innerWidth > 699">
+            
+            <span class="nome">
+                {{ user.nome | uppercase }}
+            </span>
+            <button class="logoutButton" mat-button color="primary" (click)="logout()">Sair</button>
+        </div>
+    </div>
+    <ng-template #login >
+        <a *ngIf="innerWidth > 699" mat-stroked-button color="primary" routerLink="/login">Fazer login</a>
+        <a *ngIf="innerWidth > 699" mat-flat-button color="primary" routerLink="/cadastro" class="button-signup">Cadastre-se</a>
+    </ng-template>
+
+</mat-toolbar>

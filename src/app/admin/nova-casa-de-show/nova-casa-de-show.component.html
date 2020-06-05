@@ -1,0 +1,153 @@
+<div class="form">
+    <h1>Cadastrar Casa de Show</h1>
+    <form [formGroup]="casaDeShowForm" (submit)="cadastrar()">
+
+        <div class="row">
+            <div class="col-lg-6">
+                <mat-form-field class="nome" appearance="standard">
+                    <mat-label>Nome</mat-label>
+                    <input #nome matInput formControlName="nome" autofocus>
+                    <button mat-button matSuffix mat-icon-button *ngIf="casaDeShowForm.get('nome').value">
+                        <mat-icon (click)="limpar('nome')">close</mat-icon>
+                    </button>
+                    <mat-error *ngIf="casaDeShowForm.get('nome').errors?.required">
+                        Nome é <strong>obrigatório</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-2">
+                <mat-form-field class="limitePessoas" style="padding: 10.5px 0 0 0">
+                    <mat-label>Limite de pessoas</mat-label>
+                    <input type="number" matInput formControlName="limitePessoas">
+                    <button mat-button matSuffix mat-icon-button *ngIf="casaDeShowForm.get('limitePessoas').value">
+                        <mat-icon (click)="limpar('limitePessoas')">close</mat-icon>
+                    </button>
+                    <mat-hint align="start">Capacidade da casa de show</mat-hint>
+                    <mat-error *ngIf="casaDeShowForm.get('limitePessoas').errors?.required">
+                        Limite de pessoas é <strong>obrigatório</strong>
+                    </mat-error>
+                    <mat-error *ngIf="casaDeShowForm.get('limitePessoas').errors?.min">
+                        Mínimo de 1 ingresso
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-2">
+                <mat-form-field class="telefone" appearance="standard">
+                    <mat-label>Telefone</mat-label>
+                    <input #pequenatelefone matInput formControlName="telefone">
+                    <button mat-button matSuffix mat-icon-button *ngIf="casaDeShowForm.get('telefone').value">
+                        <mat-icon (click)="limpar('telefone')">close</mat-icon>
+                    </button>
+                    <mat-error *ngIf="casaDeShowForm.get('telefone').errors?.required">
+                    Telefone é <strong>obrigatório</strong>
+                    </mat-error>
+                    <mat-error *ngIf="casaDeShowForm.get('telefone').errors?.pattern">
+                        Formato (##) ####-#### ou (##) #####-####
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-2">
+                <mat-form-field class="status" style="padding: 10.5px 0 0 0">
+                    <mat-label>Status</mat-label>
+                    <mat-select formControlName="status">
+                        <mat-option value="ABERTO">Aberto</mat-option>
+                        <mat-option value="OCULTO">Oculto</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="casaDeShowForm.get('status').errors?.required">
+                        Status é <strong>obrigatório</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-2">
+                <mat-form-field class="cep" appearance="standard">
+                    <mat-label>Cep</mat-label>
+                    <input matInput formControlName="cep" placeholder="12345-789"
+                    (blur)="consultaCEP()">
+                    <button mat-button matSuffix mat-icon-button *ngIf="casaDeShowForm.get('cep').value">
+                        <mat-icon (click)="limpar('cep')">close</mat-icon>
+                    </button>
+                    <mat-error *ngIf="casaDeShowForm.get('cep').errors?.required">
+                        Cep é <strong>obrigatório</strong>
+                    </mat-error>
+                    <mat-error *ngIf="casaDeShowForm.get('cep').errors?.pattern">
+                        Cep deve estar no formato #####-###
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-2">
+                <mat-form-field class="numero" style="padding: 10.5px 0 0 0">
+                    <mat-label>Número</mat-label>
+                    <input type="number" matInput formControlName="numero">
+                    <button mat-button matSuffix mat-icon-button *ngIf="casaDeShowForm.get('numero').value">
+                        <mat-icon (click)="limpar('numero')">close</mat-icon>
+                    </button>
+                    <mat-error *ngIf="casaDeShowForm.get('numero').errors?.required">
+                        Número é <strong>obrigatório</strong>
+                    </mat-error>
+                    <mat-error *ngIf="casaDeShowForm.get('numero').errors?.min">
+                        O número deve ser maior que 0
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-2">
+                <mat-form-field class="uf">
+                    <mat-label>UF</mat-label>
+                    <input matInput formControlName="uf" >
+                    <button mat-button matSuffix mat-icon-button *ngIf="casaDeShowForm.get('uf').value">
+                        <mat-icon (click)="limpar('uf')">close</mat-icon>
+                    </button>
+                    <mat-error *ngIf="casaDeShowForm.get('uf').errors?.required">
+                        UF é <strong>obrigatório</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-2">
+                <mat-form-field class="cidade">
+                    <mat-label>Cidade</mat-label>
+                    <input matInput formControlName="cidade">
+                    <button mat-button matSuffix mat-icon-button *ngIf="casaDeShowForm.get('cidade').value">
+                        <mat-icon (click)="limpar('cidade')">close</mat-icon>
+                    </button>
+                    <mat-error *ngIf="casaDeShowForm.get('cidade').errors?.required">
+                        Cidade é <strong>obrigatório</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-2">
+                <mat-form-field class="bairro">
+                    <mat-label>Bairro</mat-label>
+                    <input matInput formControlName="bairro">
+                    <button mat-button matSuffix mat-icon-button *ngIf="casaDeShowForm.get('bairro').value">
+                        <mat-icon (click)="limpar('bairro')">close</mat-icon>
+                    </button>
+                    <mat-error *ngIf="casaDeShowForm.get('bairro').errors?.required">
+                        Bairro é <strong>obrigatório</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-6">
+                <mat-form-field class="rua">
+                    <mat-label>Rua</mat-label>
+                    <input matInput formControlName="rua">
+                    <button mat-button matSuffix mat-icon-button *ngIf="casaDeShowForm.get('rua').value">
+                        <mat-icon (click)="limpar('rua')">close</mat-icon>
+                    </button>
+                    <mat-error *ngIf="casaDeShowForm.get('rua').errors?.required">
+                        Rua é <strong>obrigatório</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row ml-1 mt-2">
+            <button class="mr-2" (click)="cancelar()" mat-raised-button color="warn">Cancelar</button>
+            <button [disabled]="casaDeShowForm.invalid" type="submit" mat-raised-button color="primary">Enviar</button>
+        </div>
+
+    </form> 
+</div>

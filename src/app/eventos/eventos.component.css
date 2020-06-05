@@ -1,0 +1,12 @@
+.noEventos {
+    margin-top: 60px;
+    text-align: center;
+    min-height: 420px;
+    color: #aaa;
+}
+
+.noEventos mat-icon {
+    transform: scale(4);
+    margin-bottom: 50px;
+    
+}

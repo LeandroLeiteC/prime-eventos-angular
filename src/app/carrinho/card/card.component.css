@@ -1,0 +1,23 @@
+mat-card {
+    margin-bottom: 10px;
+}
+
+img {
+    width: 150px;
+}
+
+.descricao {
+    text-align: justify;
+}
+
+.ingressos {
+    margin-left: 20px;
+}
+
+.quantidade {
+    font-size: 1.3em;
+}
+
+.preco {
+    font-size: 1.3em;
+}

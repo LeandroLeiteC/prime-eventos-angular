@@ -1,0 +1,40 @@
+<mat-card class="mat-elevation-z2" >
+    <div class="row">
+        <div class="col-2 align-self-center">
+            <img  [src]="url">
+        </div>
+        <div class="col-4">
+            <h2>{{ evento.nome }}</h2>
+            <p class="descricao">{{ evento.pequenaDescricao }}</p>
+        </div>
+        <div class="col-1 align-self-center ingressos">
+            <div class="row justify-content-around">
+                Ingressos:
+            </div>
+            <div class="row justify-content-around">
+                <p class="quantidade">{{ quantidade }}</p>
+            </div>
+        </div>
+        <div class="col-1 align-self-center">
+            <button mat-icon-button color="primary" (click)="add(evento.id, evento.limiteCliente, evento.ingressosDisponiveis)">
+                <mat-icon>add_circle</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="sub(evento.id)">
+                <mat-icon>remove_circle</mat-icon>
+            </button>
+        </div>
+
+        <div class="col-2 align-self-center">
+            <div class="row justify-content-around">
+                <strong>Subtotal:</strong>
+            </div>
+            <div class="row justify-content-around">
+                <p class="preco">{{ preco * quantidade | currency: 'BRL'}}</p>
+            </div>
+        </div>
+
+        <div class="col-1 align-self-center">
+            <button mat-stroked-button color="warn" (click)="remover(evento.id)">Remover</button>
+        </div>
+    </div>
+</mat-card>

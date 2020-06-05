@@ -1,0 +1,31 @@
+
+<mat-dialog-content class="mat-typography">
+  <h2 mat-dialog-title>Deletar Casa de Show</h2>
+  <h3>Tem certeza que quer deletar?</h3>
+  <p>Ao deletar uma casa de show você irá deletar todos os eventos vinculados a está casa de show
+    e consequentemente todas as compras podendo prejudicar aqueles que já compraram ingressos dos eventos.
+  </p>
+
+  <div *ngIf="data.eventos?.length > 0; else noEventos">
+    <p><strong>Eventos que serão excluídos:</strong></p>
+    <p>Total: {{ data.eventos?.length}} </p>
+    <ul>
+      <li *ngFor="let evento of data.eventos">{{ evento.nome }}#{{evento.id}}</li>
+    </ul>
+  </div>  
+
+  <ng-template #noEventos>
+    <p><strong>Esta casa de show não possue eventos cadastrados.</strong></p>
+  </ng-template>
+
+  <h3>Outra opção!</h3>
+  <p>Já considerou apenas ocultar a casa de show para que novos eventos não sejam cadastrados?
+    Desse modo você mantém os eventos ativos mas previne que essa casa de show seja usada em outros eventos!<br>
+    Caso queira apenas ocultar, clique no botão abaixo:<br>
+  </p>
+  <button mat-flat-button color="primary" (click)="ocultar()">Ocultar Casa de Show</button>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close [mat-dialog-close]="false">Cancel</button>
+  <button mat-raised-button color="warn" (click)="deletar()" cdkFocusInitial>Deletar</button>
+</mat-dialog-actions>

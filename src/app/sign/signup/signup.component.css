@@ -1,0 +1,15 @@
+.form {
+    text-align: center;
+    margin-top: 50px;
+}
+.formField {    
+    width: 300px;
+}
+
+.cadastroButton {
+    width: 200px;
+}
+
+.prefix-icon {
+    color: rgb(126, 126, 126);
+}
